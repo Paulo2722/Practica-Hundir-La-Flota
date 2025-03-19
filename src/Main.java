@@ -1,3 +1,5 @@
 public class Main {
-    Juego juego = new Juego();
+    public static void main(String[] args) {
+        Juego juego = new Juego();
+    }
 }

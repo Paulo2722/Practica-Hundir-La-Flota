@@ -18,7 +18,7 @@ public class Casilla {
         this.estaAbierta = true;
     }
 
-    public char símbolo(){
+    public char Simbolo(){
         if (estaAbierta){
             return ' ';
         }else if (tieneBarco){
