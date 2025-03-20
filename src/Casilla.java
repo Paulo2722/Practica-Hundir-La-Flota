@@ -8,10 +8,11 @@ public class Casilla {
     }
 
     public boolean tieneBarco(){
-        return false;
+        return tieneBarco;
     }
-    public boolean estaMarcada(){
-        return false;
+
+    public boolean estaAbierta(){
+        return estaAbierta;
     }
 
     public void abrir(){
@@ -21,7 +22,8 @@ public class Casilla {
     public char Simbolo(){
         if (estaAbierta){
             return ' ';
-        }else if (tieneBarco){
+        }
+        if (tieneBarco){
             return 'X';
         }
         return '#';
