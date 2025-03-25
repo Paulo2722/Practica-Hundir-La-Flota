@@ -1,52 +1,62 @@
 public class Barco {
     private boolean estaGolpeado;
     private boolean estaHundido;
-    private int golpesMaximos;
+    private final int golpesMaximos;
+    private int golpesRecibidos;
 
-    public Barco(boolean estaGolpeado, boolean estaHunido, int golpesMaximos){
+    public Barco(int golpesMaximos, int numeroBarcos){
         this.estaGolpeado = false;
         this.estaHundido = false;
+        this.golpesMaximos = golpesMaximos;
+        this.golpesRecibidos = 0;
+    }
+
+    public boolean estaGolpeado(){
+        return estaGolpeado;
+    }
+
+    public boolean estaHundido(){
+        return estaHundido;
+    }
+
+    public int golpesMaximos(){
+        return golpesMaximos;
+    }
+
+    public void barcoImpactado(){
+        if (estaGolpeado){
+            golpesRecibidos++;
+        }
+        if (golpesRecibidos >= golpesMaximos){
+            estaHundido = true;
+        }
     }
 }
 
 class Velero extends Barco{
-    private final int numeroVeleros = 4;
 
-    public Velero(boolean estaGolpeado, boolean estaHunido, int golpesMaximos){
-        super(false, false, 1);
+    public Velero(){
+        super(1, 4);
     }
 }
 
 class Submarino extends Barco{
-    private final int numeroSubmarinos = 3;
 
-    public Submarino(boolean estaGolpeado, boolean estaHunido, int golpesMaximos){
-        super(false, false, 2);
+    public Submarino(){
+        super(2, 3);
     }
-
 }
 
 class Buque extends Barco{
-    private final int numeroBuques = 2;
 
-    public Buque(boolean estaGolpeado, boolean estaHunido, int golpesMaximos){
-        super(false, false, 3);
+    public Buque(){
+        super(3, 2);
     }
-
 }
 
 class Navio extends Barco{
-    public final int numeroNavios = 1;
 
-    public Navio(boolean estaGolpeado, boolean estaHunido, int golpesMaximos){
-        super(false, false, 4);
+    public Navio(){
+        super(4, 1);
     }
-
 }
-/*10 barcos
--4 barco de 1 casilla
--3 barco de 2 casillas
--2 barco de 3 casillas
--1 barco de 4 caillas
- */
-
