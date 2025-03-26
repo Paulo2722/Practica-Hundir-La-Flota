@@ -4,7 +4,7 @@ public class Barco {
     private final int golpesMaximos;
     private int golpesRecibidos;
 
-    public Barco(int golpesMaximos, int numeroBarcos){
+    public Barco(int golpesMaximos){
         this.estaGolpeado = false;
         this.estaHundido = false;
         this.golpesMaximos = golpesMaximos;
@@ -36,27 +36,27 @@ public class Barco {
 class Velero extends Barco{
 
     public Velero(){
-        super(1, 4);
+        super(1);
     }
 }
 
 class Submarino extends Barco{
 
     public Submarino(){
-        super(2, 3);
+        super(2);
     }
 }
 
 class Buque extends Barco{
 
     public Buque(){
-        super(3, 2);
+        super(3);
     }
 }
 
 class Navio extends Barco{
 
     public Navio(){
-        super(4, 1);
+        super(4);
     }
 }
