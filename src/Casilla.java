@@ -1,6 +1,7 @@
 public class Casilla {
     private boolean tieneBarco;
     private boolean estaAbierta;
+    private Barco barco;
 
     public Casilla(){
         this.tieneBarco = false;
@@ -9,6 +10,12 @@ public class Casilla {
 
     public boolean tieneBarco(){
         return tieneBarco;
+    }
+
+    public void ponerBarco(Barco barco){
+        if(tieneBarco) {
+            this.barco = barco;
+        }
     }
 
     public boolean estaAbierta(){
