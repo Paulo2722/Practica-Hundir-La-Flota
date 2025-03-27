@@ -50,4 +50,50 @@ public class Tablero {
             barco[cantidad++] = navio;
         }
     }
+
+    public boolean esHorizontal() {
+
+        int orientacion = random.nextInt(2);
+
+        return orientacion == 0;
+    }
+
+    public void colocarBarcos() {
+
+        int filaAleatoria;
+        int columnaAleatoria;
+
+        for (int i = 0; i < barco.length; i++){
+
+            boolean horizontal = esHorizontal();
+
+            filaAleatoria = random.nextInt();
+
+            if (horizontal){
+                columnaAleatoria = random.nextInt(columnas - barco[i].golpesMaximos());
+            }else{
+                columnaAleatoria = random.nextInt();
+            }
+            hayEspacioParaBarco(filaAleatoria, columnaAleatoria, barco[i], horizontal);
+        }
+    }
+
+    public void hayEspacioParaBarco(int filaAleatoria, int columnaAleatoria, Barco barco, boolean horizontal) {
+        for (int n = 0; n < barco.golpesMaximos(); n++) {
+            int fila2;
+            int columna2;
+
+            if (horizontal) {
+                fila2 = filaAleatoria;
+                columna2 = columnaAleatoria + n;
+            } else {
+                fila2 = filaAleatoria + n;
+                columna2 = columnaAleatoria;
+            }
+
+            if (tablero[fila2][columna2].tieneBarco())
+                return;
+        }
+    }
 }
+
