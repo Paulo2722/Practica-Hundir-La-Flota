@@ -5,6 +5,7 @@ public class Tablero {
     private Barco[] barco;
     private final int filas = 10;
     private final int columnas = 10;
+    private int barcosHundidos = 0;
     Random random = new Random();
 
     public Tablero() {
@@ -94,6 +95,46 @@ public class Tablero {
             if (tablero[fila2][columna2].tieneBarco())
                 return;
         }
+    }
+
+    public boolean tocarBarco(int fila, int columna){
+
+        if (fila < 0 || columna < 0 || fila >= filas | columna >= columnas){
+            System.out.println("Posición no válida, introduce nuevos valores");
+            return false;
+        }
+
+        Casilla casilla = tablero[fila][columna];
+        if (casilla.estaAbierta()){
+            System.out.println("Posición no válida, introduce nuevos valores");
+            return false;
+        }else{
+            casilla.abrir();
+        }
+        if (casilla.tieneBarco()){
+            Barco barco = casilla.getBarco();
+            barco.barcoImpactado();
+
+            if (barco.estaHundido()){
+                System.out.println("Has hundido un barco");
+                barcosHundidos++;
+            }else{
+                System.out.println("Golpe");
+            }
+            return true;
+
+        }else{
+            System.out.println("Agua");
+            return false;
+        }
+    }
+
+    public int getBarcosHundidos() {
+        return barcosHundidos;
+    }
+
+    public void setBarcosHundidos(int barcosHundidos) {
+        this.barcosHundidos = barcosHundidos;
     }
 }
 

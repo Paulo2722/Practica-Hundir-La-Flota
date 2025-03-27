@@ -1,18 +1,16 @@
 public class Barco {
-    private boolean estaGolpeado;
     private boolean estaHundido;
     private final int golpesMaximos;
     private int golpesRecibidos;
 
     public Barco(int golpesMaximos){
-        this.estaGolpeado = false;
         this.estaHundido = false;
         this.golpesMaximos = golpesMaximos;
         this.golpesRecibidos = 0;
     }
 
     public boolean estaGolpeado(){
-        return estaGolpeado;
+        return true;
     }
 
     public boolean estaHundido(){
@@ -24,9 +22,8 @@ public class Barco {
     }
 
     public void barcoImpactado(){
-        if (estaGolpeado){
-            golpesRecibidos++;
-        }
+        golpesRecibidos++;
+
         if (golpesRecibidos >= golpesMaximos){
             estaHundido = true;
         }
