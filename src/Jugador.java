@@ -1,7 +1,11 @@
 public class Jugador {
     private String nombre;
 
-    public String getJugador(){
+    public Jugador(String nombre){
+        this.nombre = nombre;
+    }
+
+    public String getNombre(){
         return nombre;
     }
     public void setNombre(String nombre){

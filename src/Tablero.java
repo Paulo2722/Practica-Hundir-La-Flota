@@ -22,7 +22,7 @@ public class Tablero {
     public void imprimirTablero() {
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
-                System.out.println("[" + tablero[i][j].Simbolo() + "]");
+                System.out.print("[" + tablero[i][j].Simbolo() + "]");
             }
             System.out.println();
         }
@@ -64,22 +64,46 @@ public class Tablero {
         int filaAleatoria;
         int columnaAleatoria;
 
-        for (int i = 0; i < barco.length; i++){
+        for (int i = 0; i < barco.length; i++) {
 
-            boolean horizontal = esHorizontal();
+            boolean estaColocado = false;
+            while (!estaColocado) {
 
-            filaAleatoria = random.nextInt();
+                boolean horizontal = esHorizontal();
+
+                filaAleatoria = random.nextInt(filas);
+
+                if (horizontal) {
+                    columnaAleatoria = random.nextInt(columnas - barco[i].golpesMaximos());
+                } else {
+                    columnaAleatoria = random.nextInt(columnas);
+                }
+                if (hayEspacioParaBarco(filaAleatoria, columnaAleatoria, barco[i], horizontal)){
+                    mostrarbarcosTablero(filaAleatoria, columnaAleatoria, barco[i], horizontal);
+                    estaColocado = true;
+                }
+            }
+        }
+    }
+    public void mostrarbarcosTablero(int fila, int columna, Barco barco, boolean horizontal){
+        for (int j = 0; j < barco.golpesMaximos(); j++){
+
+            int filaElegida;
+            int columnaElegida;
 
             if (horizontal){
-                columnaAleatoria = random.nextInt(columnas - barco[i].golpesMaximos());
+                filaElegida = fila;
+                columnaElegida = columna + j;
             }else{
-                columnaAleatoria = random.nextInt();
+                filaElegida = fila + j;
+                columnaElegida = columna;
             }
-            hayEspacioParaBarco(filaAleatoria, columnaAleatoria, barco[i], horizontal);
+            tablero[filaElegida][columnaElegida].colocarBarco(barco);
         }
     }
 
-    public void hayEspacioParaBarco(int filaAleatoria, int columnaAleatoria, Barco barco, boolean horizontal) {
+
+    public boolean hayEspacioParaBarco(int filaAleatoria, int columnaAleatoria, Barco barco, boolean horizontal) {
         for (int n = 0; n < barco.golpesMaximos(); n++) {
             int fila2;
             int columna2;
@@ -92,9 +116,14 @@ public class Tablero {
                 columna2 = columnaAleatoria;
             }
 
+            if (fila2 >= filas || columna2 >= columnas) {
+                return false;
+            }
+
             if (tablero[fila2][columna2].tieneBarco())
-                return;
+                return false;
         }
+        return true;
     }
 
     public boolean tocarBarco(int fila, int columna){
@@ -135,6 +164,15 @@ public class Tablero {
 
     public void setBarcosHundidos(int barcosHundidos) {
         this.barcosHundidos = barcosHundidos;
+    }
+
+    public boolean victoria(){
+        if (barcosHundidos == 10){
+            System.out.println("Has hundido todos los barcos");
+            return true;
+        }else{
+            return false;
+        }
     }
 }
 

@@ -8,8 +8,13 @@ public class Casilla {
         this.estaAbierta = false;
     }
 
+    public void colocarBarco(Barco barco){
+        this.barco = barco;
+        this.tieneBarco = true;
+    }
+
     public boolean tieneBarco(){
-        return tieneBarco;
+        return this.barco != null;
     }
 
     public Barco getBarco(){
@@ -26,13 +31,17 @@ public class Casilla {
 
     public char Simbolo(){
         if (estaAbierta){
+            if (tieneBarco && barco != null){
+                if (barco.estaGolpeado()){
+                    return 'X';
+                }else{
+                    return 'Q';
+                }
+            }
             return '~';
         }
         if (tieneBarco){
-            return ' ';
-        }
-        if (barco.estaGolpeado()){
-            return 'X';
+            return 'Q';
         }
         return '#';
     }
